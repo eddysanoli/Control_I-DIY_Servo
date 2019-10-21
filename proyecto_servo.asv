@@ -1,0 +1,5 @@
+%% IE3006 - Sistemas de Control 1 - Proyecto final
+% Gabriela Iriarte - 16009
+% Eduardo Santizo  - 16089
+%% Captura de datos
+plot(t_1)
