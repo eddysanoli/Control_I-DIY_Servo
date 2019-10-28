@@ -1,6 +1,10 @@
 %% IE3006 - Sistemas de Control 1 - Proyecto final
 % Gabriela Iriarte - 16009
 % Eduardo Santizo  - 16089
+%% Carga de datos
+load('PID')
+load('oscilo');
+load('tfs');
 %% Captura de datos
 
 figure(1);
@@ -13,7 +17,7 @@ plot(t_1,CH2_1)
 dt1 = t_1(1000)-t_1(999); % Es el mismo para todas las tomas.
 
 % toma4.csv
-subplot(2,2,2)
+subplot(2,2,4)
 plot(t_2,CH1_2)
 hold on;
 plot(t_2,CH2_2)
@@ -27,7 +31,7 @@ plot(t_3,CH2_3)
 dt3 = t_3(1000)-t_3(999);
 
 % toma2.csv
-subplot(2,2,4)
+subplot(2,2,2)
 plot(t_4,CH1_4)
 hold on;
 plot(t_4,CH2_4)
@@ -45,14 +49,14 @@ plot(t_1cut,CH2_1cut)
 hold on;
 plot(t_1cut,CH1_1cut)
 
-% toma4.csv
-t_2cut = t_2(670:1050);
-CH1_2cut = CH1_2(670:1050);
-CH2_2cut = CH2_2(670:1050)+0.16;
+% toma2.csv
+t_4cut = t_4(670:1050);
+CH1_4cut = CH1_4(670:1050);
+CH2_4cut = CH2_4(670:1050)+0.16;
 subplot(2,2,2)
-plot(t_2cut,CH2_2cut)
+plot(t_4cut,CH2_4cut)
 hold on;
-plot(t_2cut,CH1_2cut)
+plot(t_4cut,CH1_4cut)
 
 % toma3.csv
 t_3cut = t_3(670:980);
@@ -63,14 +67,14 @@ plot(t_3cut,CH2_3cut)
 hold on;
 plot(t_3cut,CH1_3cut)
 
-% toma2.csv
-t_4cut = t_4(670:1150);
-CH1_4cut = CH1_4(670:1150);
-CH2_4cut = CH2_4(670:1150)+0.16;
+% toma4.csv
+t_2cut = t_2(670:1150);
+CH1_2cut = CH1_2(670:1150);
+CH2_2cut = CH2_2(670:1150)+0.16;
 subplot(2,2,4)
-plot(t_4cut,CH2_4cut)
+plot(t_2cut,CH2_2cut)
 hold on;
-plot(t_4cut,CH1_4cut)
+plot(t_2cut,CH1_2cut)
 
 %% System Identification Toolbox
 
@@ -78,4 +82,31 @@ plot(t_4cut,CH1_4cut)
 % tfprueba2 - 53.88% fit
 % tfprueba3 - 97.27% fit
 % tfprueba4 - 91.22% fit
+
+%% PID Tuner
+
+% tfprueba3 - PID
+% tr: 0.0736 s ts: 0.675s Mp: 3.65%
+
+%% Cálculo de resistencias para simulink
+u = 1.0000e-06;
+k = 1000;
+
+Rp1 = 1*k;
+Rp2 = 4.7*k; % POT
+
+Ri1 = 2*k;   % POT
+Ci = 100*u;
+Ri2 = 0;
+
+Cd = 220*u;
+Rd1 = 0;
+Rd2 = 4.7*k; % POT
+
+Rs = 1*k;    % POT
+R = 1*k;
+
+
+
+
 
